@@ -1,6 +1,6 @@
 import React from 'react';
 import CountdownTimer from './CountdownTimer';
-import heroImage from '@/assets/wedding-hero.jpg';
+// Using the uploaded image directly
 
 const HeroSection = () => {
   return (
@@ -8,7 +8,7 @@ const HeroSection = () => {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(/lovable-uploads/94883e4a-7b96-40cc-831d-9a2b9e705499.png)` }}
       >
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
