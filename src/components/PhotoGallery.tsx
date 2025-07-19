@@ -1,5 +1,7 @@
-import React from 'react';
-import { Camera, Heart } from 'lucide-react';
+import React, { useCallback } from 'react';
+import { Camera, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import { Button } from '@/components/ui/button';
 
 // Using uploaded images directly
 const photos = [
@@ -11,6 +13,23 @@ const photos = [
 ];
 
 const PhotoGallery = () => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true,
+    align: 'center',
+    slidesToScroll: 1,
+    breakpoints: {
+      '(min-width: 768px)': { slidesToScroll: 1 }
+    }
+  });
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -35,31 +54,66 @@ const PhotoGallery = () => {
           </p>
         </div>
 
-        {/* Photo Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {photos.map((photo, index) => (
-            <div 
-              key={index}
-              className="group relative overflow-hidden rounded-2xl shadow-soft bg-white animate-fade-in hover:shadow-wedding transition-all duration-300"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="aspect-[4/5] overflow-hidden">
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <div className="flex justify-center">
-                    <Heart className="w-6 h-6 text-wedding-gold" />
+        {/* Photo Slider */}
+        <div className="relative max-w-4xl mx-auto">
+          <div className="embla overflow-hidden rounded-2xl" ref={emblaRef}>
+            <div className="embla__container flex">
+              {photos.map((photo, index) => (
+                <div 
+                  key={index}
+                  className="embla__slide flex-[0_0_100%] md:flex-[0_0_80%] lg:flex-[0_0_60%] px-4"
+                >
+                  <div className="group relative overflow-hidden rounded-2xl shadow-soft bg-white hover:shadow-wedding transition-all duration-300">
+                    <div className="aspect-[4/5] overflow-hidden">
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
+                    
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-4 left-4 right-4 text-white">
+                        <div className="flex justify-center">
+                          <Heart className="w-6 h-6 text-wedding-gold" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
+          </div>
+
+          {/* Navigation Buttons */}
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border-wedding-gold text-wedding-gold hover:text-wedding-gold z-10 rounded-full w-12 h-12 shadow-wedding"
+            onClick={scrollPrev}
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </Button>
+
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border-wedding-gold text-wedding-gold hover:text-wedding-gold z-10 rounded-full w-12 h-12 shadow-wedding"
+            onClick={scrollNext}
+          >
+            <ChevronRight className="w-6 h-6" />
+          </Button>
+        </div>
+
+        {/* Navigation Dots */}
+        <div className="flex justify-center mt-8 gap-2">
+          {photos.map((_, index) => (
+            <button
+              key={index}
+              className="w-3 h-3 rounded-full bg-wedding-gold/30 hover:bg-wedding-gold/60 transition-colors duration-200"
+              onClick={() => emblaApi?.scrollTo(index)}
+            />
           ))}
         </div>
 
@@ -75,6 +129,7 @@ const PhotoGallery = () => {
           </div>
         </div>
       </div>
+
     </section>
   );
 };
