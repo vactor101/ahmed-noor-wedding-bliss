@@ -56,7 +56,7 @@ const CoupleStory = () => {
                 Alaa
               </h3>
               <h4 className="text-2xl font-amiri arabic-text text-wedding-gold mb-6">
-                علاء
+                الاء
               </h4>
             </div>
 
