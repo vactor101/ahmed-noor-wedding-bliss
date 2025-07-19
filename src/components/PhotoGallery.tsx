@@ -1,25 +1,40 @@
-import React, { useCallback } from 'react';
-import { Camera, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
-import useEmblaCarousel from 'embla-carousel-react';
-import { Button } from '@/components/ui/button';
+import React, { useCallback, useEffect } from "react";
+import { Camera, Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import { Button } from "@/components/ui/button";
 
 // Using uploaded images directly
 const photos = [
-  { src: '/lovable-uploads/94883e4a-7b96-40cc-831d-9a2b9e705499.png', alt: 'Ahmed & Noor - Beautiful Moment 1' },
-  { src: '/lovable-uploads/c89e8ff0-8a90-476b-bb94-ed30492086d6.png', alt: 'Ahmed & Noor - Beautiful Moment 2' },
-  { src: '/lovable-uploads/52fc0ba8-ebdc-41cc-8a1d-1b636445d11f.png', alt: 'Ahmed & Noor - Beautiful Moment 3' },
-  { src: '/lovable-uploads/4b22a332-8c45-48ca-91c6-a24f1a3824b5.png', alt: 'Ahmed & Noor - Beautiful Moment 4' },
-  { src: '/lovable-uploads/aaf78d6b-1b81-49cd-b9e6-9c42244a76ee.png', alt: 'Ahmed & Noor - Beautiful Moment 5' },
+  {
+    src: "/lovable-uploads/94883e4a-7b96-40cc-831d-9a2b9e705499.png",
+    alt: "Ahmed & Alaa - Beautiful Moment 1",
+  },
+  {
+    src: "/lovable-uploads/c89e8ff0-8a90-476b-bb94-ed30492086d6.png",
+    alt: "Ahmed & Alaa - Beautiful Moment 2",
+  },
+  {
+    src: "/lovable-uploads/52fc0ba8-ebdc-41cc-8a1d-1b636445d11f.png",
+    alt: "Ahmed & Alaa - Beautiful Moment 3",
+  },
+  {
+    src: "/lovable-uploads/4b22a332-8c45-48ca-91c6-a24f1a3824b5.png",
+    alt: "Ahmed & Alaa - Beautiful Moment 4",
+  },
+  {
+    src: "/lovable-uploads/aaf78d6b-1b81-49cd-b9e6-9c42244a76ee.png",
+    alt: "Ahmed & Alaa - Beautiful Moment 5",
+  },
 ];
 
 const PhotoGallery = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+  const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
-    align: 'center',
+    align: "center",
     slidesToScroll: 1,
     breakpoints: {
-      '(min-width: 768px)': { slidesToScroll: 1 }
-    }
+      "(min-width: 768px)": { slidesToScroll: 1 },
+    },
   });
 
   const scrollPrev = useCallback(() => {
@@ -28,6 +43,17 @@ const PhotoGallery = () => {
 
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const autoPlay = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 4000); // Auto scroll every 4 seconds
+
+    // Clear interval when component unmounts or emblaApi changes
+    return () => clearInterval(autoPlay);
   }, [emblaApi]);
 
   return (
@@ -39,7 +65,7 @@ const PhotoGallery = () => {
             <Camera className="w-8 h-8 text-wedding-gold" />
             <Heart className="w-6 h-6 text-wedding-gold animate-float" />
           </div>
-          
+
           <h2 className="text-4xl md:text-5xl font-playfair font-bold text-wedding-dark mb-4">
             Our Memories
           </h2>
@@ -59,7 +85,7 @@ const PhotoGallery = () => {
           <div className="embla overflow-hidden rounded-2xl" ref={emblaRef}>
             <div className="embla__container flex">
               {photos.map((photo, index) => (
-                <div 
+                <div
                   key={index}
                   className="embla__slide flex-[0_0_100%] md:flex-[0_0_80%] lg:flex-[0_0_60%] px-4"
                 >
@@ -71,7 +97,7 @@ const PhotoGallery = () => {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                     </div>
-                    
+
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute bottom-4 left-4 right-4 text-white">
@@ -119,7 +145,10 @@ const PhotoGallery = () => {
 
         {/* Bottom Message */}
         <div className="mt-16 text-center">
-          <div className="bg-wedding-warm rounded-2xl p-8 shadow-soft max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <div
+            className="bg-wedding-warm rounded-2xl p-8 shadow-soft max-w-4xl mx-auto animate-fade-in"
+            style={{ animationDelay: "0.6s" }}
+          >
             <h4 className="text-2xl font-playfair font-semibold text-wedding-dark mb-4">
               Every picture tells our story
             </h4>
@@ -129,7 +158,6 @@ const PhotoGallery = () => {
           </div>
         </div>
       </div>
-
     </section>
   );
 };
