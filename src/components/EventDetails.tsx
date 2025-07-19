@@ -32,7 +32,9 @@ const EventDetails = () => {
             <div className="space-y-4 mb-6">
               <div className="flex items-center justify-center gap-2 text-muted-foreground">
                 <Clock className="w-5 h-5" />
-                <span>تبدأ الساعة 10:00 مساءً</span>
+                <span className="font-amiri arabic-text">
+                  تبدأ الساعة 10:00 مساءً
+                </span>
               </div>
 
               <p className="text-center font-amiri arabic-text text-lg leading-relaxed">
@@ -61,7 +63,9 @@ const EventDetails = () => {
             <div className="space-y-4 mb-6">
               <div className="flex items-center justify-center gap-2 text-muted-foreground">
                 <Clock className="w-5 h-5" />
-                <span>تبدأ الساعة 11:00 مساءً</span>
+                <span className="font-amiri arabic-text">
+                  تبدأ الساعة 10:00 مساءً
+                </span>
               </div>
 
               <p className="text-center font-amiri arabic-text text-lg leading-relaxed">

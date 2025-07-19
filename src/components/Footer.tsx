@@ -20,7 +20,7 @@ const Footer = () => {
           </div>
 
           <h4 className="text-xl md:text-2xl font-amiri arabic-text text-wedding-gold mb-8">
-            أحمد وعلاء
+            أحمد والاء
           </h4>
 
           <p className="text-lg font-amiri arabic-text text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
