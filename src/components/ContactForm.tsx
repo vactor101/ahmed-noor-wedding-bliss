@@ -32,7 +32,7 @@ const ContactForm = () => {
 
     try {
     const serviceID = 'service_0yrl8qr';
-const templateID = 'template_ddjfzkt';
+const templateID = 'template_ba45ha9';
 const publicKey = 'oGTb7cIwKZwGEofz8';
 
 
