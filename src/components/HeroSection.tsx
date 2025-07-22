@@ -7,19 +7,13 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-  {/* Optimized background with multiple formats */}
-  <picture>
-    <source 
-      srcSet="/lovable-uploads/94883e4a-7b96-40cc-831d-9a2b9e705499.webp" 
-      type="image/webp" 
-    />
+
     <img 
       src="/lovable-uploads/94883e4a-7b96-40cc-831d-9a2b9e705499.png"
       alt="Ahmed and Alaa wedding background"
       className="w-full h-full object-cover object-center"
       loading="eager"
     />
-  </picture>
   <div className="absolute inset-0 bg-black/40"></div>
 </div>
 
