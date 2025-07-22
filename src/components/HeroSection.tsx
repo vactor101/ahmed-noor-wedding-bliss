@@ -6,14 +6,16 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(/lovable-uploads/94883e4a-7b96-40cc-831d-9a2b9e705499.png)`,
-        }}
-      >
-        <div className="absolute inset-0 bg-black/40"></div>
-      </div>
+    <div
+  className="absolute inset-0 bg-no-repeat bg-center"
+  style={{
+    backgroundImage: `url(/lovable-uploads/94883e4a-7b96-40cc-831d-9a2b9e705499.png)`,
+    backgroundSize: 'contain',
+  }}
+>
+  <div className="absolute inset-0 bg-black/40"></div>
+</div>
+
 
       {/* Decorative Elements */}
       <div className="absolute top-10 left-10 text-wedding-gold opacity-30 animate-float">

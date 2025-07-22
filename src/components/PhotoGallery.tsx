@@ -17,10 +17,7 @@ const photos = [
     src: "/lovable-uploads/52fc0ba8-ebdc-41cc-8a1d-1b636445d11f.png",
     alt: "Ahmed & Alaa - Beautiful Moment 3",
   },
-  {
-    src: "/lovable-uploads/4b22a332-8c45-48ca-91c6-a24f1a3824b5.png",
-    alt: "Ahmed & Alaa - Beautiful Moment 4",
-  },
+  
   {
     src: "/lovable-uploads/aaf78d6b-1b81-49cd-b9e6-9c42244a76ee.png",
     alt: "Ahmed & Alaa - Beautiful Moment 5",
