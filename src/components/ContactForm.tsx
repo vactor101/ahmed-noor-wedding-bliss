@@ -44,12 +44,20 @@ const ContactForm = () => {
         from_name: formData.name,
         from_email: formData.email || 'noreply@wedding.com',
         message: formData.message,
-        to_email1: 'ahmedmubarrakk@gmail.com',
-        to_email2: 'alaagawish30@gmail.com',
         reply_to: formData.email || 'noreply@wedding.com'
       };
 
-      await emailjs.send(serviceID, templateID, templateParams, publicKey);
+      // Send to first email
+      await emailjs.send(serviceID, templateID, {
+        ...templateParams,
+        to_email: 'ahmedmubarrakk@gmail.com'
+      }, publicKey);
+
+      // Send to second email
+      await emailjs.send(serviceID, templateID, {
+        ...templateParams,
+        to_email: 'alaagawish30@gmail.com'
+      }, publicKey);
 
       toast({
         title: "شكراً لك!",
@@ -86,7 +94,7 @@ const ContactForm = () => {
               Share Your Wishes
             </h2>
             <h3 className="text-2xl md:text-3xl font-amiri arabic-text text-wedding-gold mb-6">
-              شاركونا بذكرى تفضل معانا طول العمر
+              شاركونا بذكرى تفضل معانا طول ال��مر
             </h3>
             <p className="text-lg text-muted-foreground">
               Send us your congratulations and well wishes
@@ -123,7 +131,7 @@ const ContactForm = () => {
                 <div>
                   <Textarea
                     name="message"
-                    placeholder="اكتب رسالتك هنا..."
+                    placeholder="اكتب ��سالتك هنا..."
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
@@ -152,7 +160,7 @@ const ContactForm = () => {
                 معلومات إضافية
               </h4>
               <p className="text-lg font-amiri arabic-text text-muted-foreground leading-relaxed">
-                للاستفسار أو لأي معلومات إضافية، يرجى التواصل معنا
+                للاستفسار أو لأي ��علومات إضافية، يرجى التواصل معنا
               </p>
             </div>
           </div>

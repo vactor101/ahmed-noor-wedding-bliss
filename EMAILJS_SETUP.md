@@ -17,7 +17,8 @@ Follow these steps to set up free email sending for your wedding contact form:
 ## 3. Create Email Template
 1. Go to "Email Templates" in your dashboard
 2. Click "Create New Template"
-3. Use this template content:
+3. Set the **To Email** field to: `{{to_email}}`
+4. Use this template content:
 
 **Subject:** New Wedding Message from {{from_name}}
 
@@ -33,9 +34,10 @@ Message:
 
 ---
 This message was sent from your wedding website contact form.
+Reply to: {{reply_to}}
 ```
 
-4. Save the template and copy the **Template ID**
+5. Save the template and copy the **Template ID**
 
 ## 4. Get Your Public Key
 1. Go to "Account" > "General"
@@ -46,9 +48,9 @@ This message was sent from your wedding website contact form.
 2. Replace the placeholder values with your actual EmailJS credentials:
 
 ```
-VITE_EMAILJS_SERVICE_ID=service_0yrl8qr
-VITE_EMAILJS_TEMPLATE_ID=template_ddjfzkt
-VITE_EMAILJS_PUBLIC_KEY=oGTb7cIwKZwGEofz8
+VITE_EMAILJS_SERVICE_ID=your_actual_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_actual_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_actual_public_key
 ```
 
 ## 6. Configure Email Recipients
@@ -70,9 +72,24 @@ npm run dev
 - Reliable email delivery
 
 ## Troubleshooting
-- Make sure your environment variables are properly set
+
+### 400 Bad Request Error
+If you get a 400 error:
+1. **Check Template Configuration**: Make sure your email template has `{{to_email}}` in the "To Email" field
+2. **Verify Template Variables**: Ensure all variables (`{{from_name}}`, `{{message}}`, etc.) match your template
+3. **Check Service Status**: Verify your EmailJS service is active and properly configured
+4. **Test Template**: Use EmailJS dashboard to test your template manually
+
+### Other Common Issues
+- Make sure your environment variables are properly set in `.env.local`
 - Check the browser console for any error messages
 - Verify your EmailJS service and template are active
 - Ensure your Gmail/email provider allows the EmailJS service
+- Restart your development server after changing environment variables
+
+### Still Having Issues?
+1. Check your EmailJS dashboard for error logs
+2. Try sending a test email from the EmailJS dashboard
+3. Verify your service is connected to the correct email account
 
 Your contact form will now send real emails to both specified addresses!
