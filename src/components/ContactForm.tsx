@@ -22,7 +22,7 @@ const ContactForm = () => {
     if (!formData.name || !formData.message) {
       toast({
         title: "يرجى ملء جميع الحقول",
-        description: "الاسم والر��الة مطلوبان",
+        description: "الاسم والرسالة مطلوبان",
         variant: "destructive"
       });
       return;
@@ -31,7 +31,6 @@ const ContactForm = () => {
     setIsLoading(true);
 
     try {
-      // EmailJS configuration - Get these from environment variables
       const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
       const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
@@ -44,52 +43,11 @@ const ContactForm = () => {
         from_name: formData.name,
         from_email: formData.email || 'noreply@wedding.com',
         message: formData.message,
-        reply_to: formData.email || 'noreply@wedding.com'
+        reply_to: formData.email || 'noreply@wedding.com',
+        to_email: 'ahmedmubarrakk@gmail.com' // used dynamically in template
       };
 
-      // Send to first email using correct API format
-      const response1 = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          service_id: serviceID,
-          template_id: templateID,
-          user_id: publicKey,
-          template_params: {
-            ...templateParams,
-            to_email: 'ahmedmubarrakk@gmail.com'
-          }
-        })
-      });
-
-      if (!response1.ok) {
-        const errorText = await response1.text();
-        throw new Error(`Failed to send to first email: ${errorText}`);
-      }
-
-      // Send to second email using correct API format
-      const response2 = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          service_id: serviceID,
-          template_id: templateID,
-          user_id: publicKey,
-          template_params: {
-            ...templateParams,
-            to_email: 'alaagawish30@gmail.com'
-          }
-        })
-      });
-
-      if (!response2.ok) {
-        const errorText = await response2.text();
-        throw new Error(`Failed to send to second email: ${errorText}`);
-      }
+      await emailjs.send(serviceID, templateID, templateParams, publicKey);
 
       toast({
         title: "شكراً لك!",
@@ -97,11 +55,11 @@ const ContactForm = () => {
       });
 
       setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      console.error('EmailJS Error:', error);
+    } catch (error: any) {
+      console.error("EmailJS Error:", error);
       toast({
-        title: "خطأ في الإرسال",
-        description: "حدث خطأ أثناء إرسال الرسا��ة. يرجى المحاولة مرة أخرى.",
+        title: "حدث خطأ أثناء الإرسال",
+        description: "يرجى المحاولة مرة أخرى لاحقًا.",
         variant: "destructive"
       });
     } finally {
@@ -126,7 +84,7 @@ const ContactForm = () => {
               Share Your Wishes
             </h2>
             <h3 className="text-2xl md:text-3xl font-amiri arabic-text text-wedding-gold mb-6">
-              شاركونا بذكرى تفضل معانا طول ال��مر
+              شاركونا بذكرى تفضل معانا طول العمر
             </h3>
             <p className="text-lg text-muted-foreground">
               Send us your congratulations and well wishes
@@ -163,7 +121,7 @@ const ContactForm = () => {
                 <div>
                   <Textarea
                     name="message"
-                    placeholder="اكتب ��سالتك هنا..."
+                    placeholder="اكتب رسالتك هنا..."
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
@@ -184,18 +142,6 @@ const ContactForm = () => {
               </form>
             </CardContent>
           </Card>
-
-          {/* Additional Info */}
-          <div className="mt-12 text-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="bg-white rounded-2xl p-6 shadow-soft">
-              <h4 className="text-xl font-amiri arabic-text text-wedding-gold mb-3">
-                معلومات إضافية
-              </h4>
-              <p className="text-lg font-amiri arabic-text text-muted-foreground leading-relaxed">
-                للاستفسار أو لأي ��علومات إضافية، يرجى التواصل معنا
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
