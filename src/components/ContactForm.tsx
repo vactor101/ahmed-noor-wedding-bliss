@@ -31,9 +31,10 @@ const ContactForm = () => {
     setIsLoading(true);
 
     try {
-      const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const serviceID = 'service_0yrl8qr';
+const templateID = 'template_ddjfzkt';
+const publicKey = 'oGTb7cIwKZwGEofz8';
+
 
       if (!serviceID || !templateID || !publicKey) {
         throw new Error('EmailJS configuration missing. Please check environment variables.');
