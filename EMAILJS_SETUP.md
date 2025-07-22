@@ -20,6 +20,8 @@ Follow these steps to set up free email sending for your wedding contact form:
 3. Set the **To Email** field to: `{{to_email}}`
 4. Use this template content:
 
+**To:** {{to_email}}
+
 **Subject:** New Wedding Message from {{from_name}}
 
 **Body:**

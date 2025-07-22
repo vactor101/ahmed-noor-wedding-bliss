@@ -47,17 +47,49 @@ const ContactForm = () => {
         reply_to: formData.email || 'noreply@wedding.com'
       };
 
-      // Send to first email
-      await emailjs.send(serviceID, templateID, {
-        ...templateParams,
-        to_email: 'ahmedmubarrakk@gmail.com'
-      }, publicKey);
+      // Send to first email using correct API format
+      const response1 = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          service_id: serviceID,
+          template_id: templateID,
+          user_id: publicKey,
+          template_params: {
+            ...templateParams,
+            to_email: 'ahmedmubarrakk@gmail.com'
+          }
+        })
+      });
 
-      // Send to second email
-      await emailjs.send(serviceID, templateID, {
-        ...templateParams,
-        to_email: 'alaagawish30@gmail.com'
-      }, publicKey);
+      if (!response1.ok) {
+        const errorText = await response1.text();
+        throw new Error(`Failed to send to first email: ${errorText}`);
+      }
+
+      // Send to second email using correct API format
+      const response2 = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          service_id: serviceID,
+          template_id: templateID,
+          user_id: publicKey,
+          template_params: {
+            ...templateParams,
+            to_email: 'alaagawish30@gmail.com'
+          }
+        })
+      });
+
+      if (!response2.ok) {
+        const errorText = await response2.text();
+        throw new Error(`Failed to send to second email: ${errorText}`);
+      }
 
       toast({
         title: "شكراً لك!",
