@@ -6,20 +6,20 @@ import { Button } from "@/components/ui/button";
 // Using uploaded images directly
 const photos = [
   {
-    src: "/lovable-uploads/94883e4a-7b96-40cc-831d-9a2b9e705499.png",
+    src: "/lovable-uploads/img1.jpeg",
     alt: "Ahmed & Alaa - Beautiful Moment 1",
   },
   {
-    src: "/lovable-uploads/c89e8ff0-8a90-476b-bb94-ed30492086d6.png",
+    src: "/lovable-uploads/img2.jpeg",
     alt: "Ahmed & Alaa - Beautiful Moment 2",
   },
   {
-    src: "/lovable-uploads/52fc0ba8-ebdc-41cc-8a1d-1b636445d11f.png",
+    src: "/lovable-uploads/img3.jpeg",
     alt: "Ahmed & Alaa - Beautiful Moment 3",
   },
   
   {
-    src: "/lovable-uploads/aaf78d6b-1b81-49cd-b9e6-9c42244a76ee.png",
+    src: "/lovable-uploads/img4.jpeg",
     alt: "Ahmed & Alaa - Beautiful Moment 5",
   },
 ];
